@@ -27,3 +27,23 @@ The certificate includes:
 - `FIX`, `ABS`, `BUG`, `PCC`, `ZE`.
 
 This is a formal bounded certificate. It does not use `QV`, semantic attractors, or keyword bonuses; it proves that this music-generating program, its input, output, trace, and self-code are closed inside the stated `Solution_0` fixed point.
+
+## Relation Variant
+
+`Music_Solution_0_REL.sh` treats the `SELF/BODY` relation itself as the object solved by `Solution_0`.
+
+It does not claim static byte identity. Instead, it certifies:
+
+```text
+BODY = Run(SELF, Q, T, K)
+Solution(Solution(B0)) = Solution(B0)
+```
+
+The relation certificate writes:
+
+```text
+Music_Solution_0_REL_<K>.wav
+Music_Solution_0_REL.clcert
+```
+
+and verifies `REL=1`, `OP=1`, `FIX=1`, `ABS=1`, `BUG=0`, `PCC=1`, and `ZE=1`.
