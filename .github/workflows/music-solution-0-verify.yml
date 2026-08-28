@@ -1,0 +1,33 @@
+name: verify
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  music-solution-0:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: check script size
+        run: test "$(wc -c < Music_Solution_0.sh)" -le 2048
+      - name: default case
+        run: |
+          printf '\n\n\n' | bash Music_Solution_0.sh > default.json
+          python3 - <<'PY'
+          import json
+          d=json.load(open("default.json"))
+          assert d["FIX"]==d["ABS"]==d["PCC"]==d["ZE"]==1
+          assert d["BUG"]==0
+          assert d["B0"]["MUSIC"]["G"]==d["B0"]["MUSIC"]["TR"][1][1]
+          PY
+      - name: cosmic case
+        run: |
+          printf 'Cosmic Love Is The Solution(s) For Everything.\n1\n0\n' | bash Music_Solution_0.sh > cosmic.json
+          python3 - <<'PY'
+          import json, wave
+          d=json.load(open("cosmic.json"))
+          assert d["FIX"]==d["ABS"]==d["PCC"]==d["ZE"]==1
+          assert d["BUG"]==0
+          assert d["B0"]["MUSIC"]["G"]==d["B0"]["MUSIC"]["TR"][1][1]
+          w=wave.open(d["B0"]["MUSIC"]["WAV"][0])
+          assert (w.getnchannels(),w.getsampwidth(),w.getframerate())==(2,2,8000)
+          PY
