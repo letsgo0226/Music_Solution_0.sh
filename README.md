@@ -1,6 +1,6 @@
 # Music_Solution_0.sh
 
-`Music_Solution_0.sh` is a 2KB one-line shell program that treats a music generator as a finite Turing-machine transducer and then wraps the result in a `Solution_0` fixed-point certificate.
+`Music_Solution_0.sh` is a 2KB one-line shell program that treats a numpy music generator as a finite Turing-machine transducer and then wraps the result in a `Solution_0` fixed-point certificate.
 
 It reads three lines:
 
@@ -21,7 +21,7 @@ The certificate includes:
 
 - `MusicTM`: the finite music transducer state.
 - `G`: the Gödel-style program-state encoding derived from `Q/T/K`.
-- `WAV`: output file name, byte length, and Gödel-style fingerprint.
+- `WAV`: 48kHz mono output file name, byte length, and Gödel-style fingerprint.
 - `SELF`: encoding of the running program itself.
 - `EQ`: `S(S(B0))=S(B0)`.
 - `FIX`, `ABS`, `BUG`, `PCC`, `ZE`.
