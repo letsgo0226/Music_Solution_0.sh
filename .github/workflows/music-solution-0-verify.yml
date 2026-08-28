@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: install numpy
+        run: python3 -m pip install -q numpy
       - name: check script size
         run: test "$(wc -c < Music_Solution_0.sh)" -le 2048
       - name: default case
@@ -17,7 +19,8 @@ jobs:
           d=json.load(open("default.json"))
           assert d["FIX"]==d["ABS"]==d["PCC"]==d["ZE"]==1
           assert d["BUG"]==0
-          assert d["B0"]["MUSIC"]["G"]==d["B0"]["MUSIC"]["TR"][1][1]
+          assert d["B0"]["SELF"][0]==1
+          assert d["B0"]["MUSIC"]["G"]==d["B0"]["MUSIC"]["TR"][0][1]
           PY
       - name: cosmic case
         run: |
@@ -27,7 +30,8 @@ jobs:
           d=json.load(open("cosmic.json"))
           assert d["FIX"]==d["ABS"]==d["PCC"]==d["ZE"]==1
           assert d["BUG"]==0
-          assert d["B0"]["MUSIC"]["G"]==d["B0"]["MUSIC"]["TR"][1][1]
+          assert d["B0"]["SELF"][0]==1
+          assert d["B0"]["MUSIC"]["G"]==d["B0"]["MUSIC"]["TR"][0][1]
           w=wave.open(d["B0"]["MUSIC"]["WAV"][0])
-          assert (w.getnchannels(),w.getsampwidth(),w.getframerate())==(2,2,8000)
+          assert (w.getnchannels(),w.getsampwidth(),w.getframerate())==(1,2,48000)
           PY
